@@ -1,0 +1,58 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "7ffc2bb370636428d38c6fa76fa23e68",
+    "packages": [
+        {
+            "name": "umonkey/php-dbal",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/umonkey/php-dbal.git",
+                "reference": "212c590fb98f1daa616288238d3bf5768d1161f2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/umonkey/php-dbal/zipball/212c590fb98f1daa616288238d3bf5768d1161f2",
+                "reference": "212c590fb98f1daa616288238d3bf5768d1161f2",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.2"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Umonkey\\": "src"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Justin Forest",
+                    "email": "hex@umonkey.net"
+                }
+            ],
+            "description": "Simple database abstraction layer",
+            "homepage": "https://github.com/umonkey/php-dbal/",
+            "time": "2020-06-12T23:59:18+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "dev",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": {
+        "php": ">=7.2"
+    },
+    "platform-dev": [],
+    "plugin-api-version": "1.1.0"
+}
