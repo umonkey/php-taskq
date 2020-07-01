@@ -5,7 +5,7 @@ Simple task queue for personal use.  Features:
 - Requires only one database table to work.
 - Tasks have custom payload, an array of data.
 - Tasks have priorities, an integer.  Highest priority tasks are executed first.
-- Separate worker process.   Can either handle all tasks, or high priority (>=0), or low priority (<0).
+- Separate worker processes.   Each worker can either handle all tasks, or high priority (>=0), or low priority (<0).
 - Failed tasks get repeated.
 - Task name is a combination of service name and method name within that service.  Services are read from the dependency container.
 
