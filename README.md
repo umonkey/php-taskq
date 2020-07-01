@@ -9,7 +9,7 @@ Simple task queue for personal use.  Features:
 - Task runner is run in yet another separate process, for more fail safety.
 
 
-## Adding a task
+## Adding tasks
 
 Basically, adding a task is just an insert into the table named `taskq`.  Normally you call the `add` method of the [TaskQueue class](src/TaskQueue.php), which does that and logging.
 
@@ -22,6 +22,13 @@ Run the `bin/taskq` script, it will handle the rest.  Make sure you restart it w
 2. Check table `taskq`, fetch the first task with the highest priority for which the time has come.
 3. Run the task runner process.  If it fails, postpone the task.  If it succeeds (exit code 0), delete the task.
 4. Go to 2.
+
+
+## Handling tasks
+
+Create a service, register it with yout service controller.  For a task named `acme.fooBar`, there must be a service named `acme` with a method named `fooBar`.  The method would receive an array of data passed by the caller.
+
+Fail tasks with exceptions.
 
 
 ## Database structure
