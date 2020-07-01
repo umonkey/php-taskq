@@ -47,3 +47,9 @@ CREATE TABLE IF NOT EXISTS `taskq` (
     KEY(`attempts`)
 ) DEFAULT CHARSET utf8;
 ```
+
+
+## TODO
+
+- Move task runner to a separate class.
+- Separate lock file per priority.
