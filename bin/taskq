@@ -1,0 +1,26 @@
+#!/usr/bin/env php
+<?php
+
+/**
+ * Run the task queue.
+ **/
+
+if (!file_exists($fn = 'config/bootstrap-cli.php')) {
+    fprintf(STDERR, "File %s not found, please create.  Must call main() when all set up.\n", $fn);
+    exit(1);
+}
+
+include $fn;
+
+
+function main($container, array $args): void
+{
+    $taskq = $container['taskq'];
+
+    $mode = $args[0] ?? 'all';
+    if (is_numeric($mode)) {
+        $taskq->executeTask((int)$mode);
+    } else {
+        $taskq->run($mode);
+    }
+}
