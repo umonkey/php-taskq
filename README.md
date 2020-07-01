@@ -3,69 +3,25 @@
 Simple task queue for personal use.  Features:
 
 - Requires only one database table to work.
-- Tasks have custom payload, an array of data.
-- Tasks have priorities, an integer.  Highest priority tasks are executed first.
-- Separate worker processes.   Each worker can either handle all tasks, or high priority (>=0), or low priority (<0).
-- Failed tasks get repeated.
-- Task name is a combination of service name and method name within that service.  Services are read from the dependency container.
+- Tasks have custom payload and priority.
+- Failed tasks a retried for up to 10 times.
+- Queue workers run in a separate process, outside of the web server (fpm).
+- Task runner is run in yet another separate process, for more fail safety.
 
 
-## Setup
+## Adding a task
 
-Add this to `config/dependencies.php`:
-
-```
-$container['taskq'] = function ($c) {
-    return return $c['callableResolver']->getClassInstance('Umonkey\\TaskQueue\\TaskQueue');
-};
-```
-
-## Code examples
-
-Queue a task:
-
-```
-class SomeClass
-{
-    public function __construct($taskq)
-    {
-        $this->taskq = $taskq;
-    }
-
-    protected function doSomething(): void
-    {
-        $this->taskq->add('acme.doSomething', [
-            'key' => 'foo',
-            'value' => 'bar',
-        ], -20);
-    }
-}
-```
-
-Register task handler in `config/dependencies.php`:
+Basically, adding a task is just an insert into the table named `taskq`.  Normally you call the `add` method of the [TaskQueue class](src/TaskQueue.php), which does that and logging.
 
 
-```
-$container['acme'] = function ($c) {
-    return return $c['callableResolver']->getClassInstance('Acme\\TaskHandler\\TaskHandler');
-};
-```
+## Running tasks
 
-Handle tasks:
+Run the `bin/taskq` script, it will handle the rest.  Make sure you restart it when it fails (with cron or supervisord).  The logic is:
 
-```
-declare(strict_types=1);
-
-namespace Acme\TaskHandler
-
-class TaskHandler
-{
-    public function doSomething(array $data): void
-    {
-        error_log(var_export($data, true));
-    }
-}
-```
+1. Grab a file lock.  Exit if failed (another instance is running).
+2. Check table `taskq`, fetch the first task with the highest priority for which the time has come.
+3. Run the task runner process.  If it fails, postpone the task.  If it succeeds (exit code 0), delete the task.
+4. Go to 2.
 
 
 ## Database structure
