@@ -57,11 +57,28 @@ class TaskQueue implements TaskQueueInterface
             ]),
         ]);
 
-        $this->logger->debug('taskq: task {id} added with action={action} data={data}.', [
-            'id' => $id,
-            'action' => $action,
-            'data' => $data,
-        ]);
+        if (empty($data)) {
+            $this->logger->debug('taskq: task {id} added with action={action} and no data.', [
+                'id' => $id,
+                'action' => $action,
+            ]);
+        } elseif (count($data) == 1) {
+            $keys = array_keys($data);
+
+            $this->logger->debug('taskq: task {id} added with action={action} and {k}={v}.', [
+                'id' => $id,
+                'action' => $action,
+                'k' => $keys[0],
+                'v' => $data[$keys[0]],
+            ]);
+        } else {
+            $this->logger->debug('taskq: task {id} added with action={action} data={data}.', [
+                'id' => $id,
+                'action' => $action,
+                'data' => $data,
+            ]);
+        }
+
 
         return $id;
     }

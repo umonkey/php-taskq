@@ -49,6 +49,13 @@ CREATE TABLE IF NOT EXISTS `taskq` (
 ```
 
 
+## Changes
+
+2020-07-01:
+
+- Cleaner logging in `add()`.
+
+
 ## TODO
 
 - Move task runner to a separate class.
