@@ -1,0 +1,2 @@
+release:
+	hg push

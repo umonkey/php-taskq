@@ -51,6 +51,11 @@ CREATE TABLE IF NOT EXISTS `taskq` (
 
 ## Changes
 
+2020-07-15:
+
+- Fixed autoload issues.
+
+
 2020-07-01:
 
 - Cleaner logging in `add()`.
