@@ -26,7 +26,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Umonkey\\": "src"
+                    "Umonkey\\TaskQueue\\": "src"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
