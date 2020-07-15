@@ -12,7 +12,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Umonkey\\": "src"
+            "Umonkey\\TaskQueue\\": "src"
         }
     },
     "bin": [

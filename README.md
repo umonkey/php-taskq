@@ -58,5 +58,5 @@ CREATE TABLE IF NOT EXISTS `taskq` (
 
 ## TODO
 
-- Move task runner to a separate class.
-- Separate lock file per priority.
+- [ ] Move task runner to a separate class.
+- [ ] Separate lock file per priority.
